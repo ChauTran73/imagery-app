@@ -1,0 +1,39 @@
+.navbar{
+  height: 50px;
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+  padding-top: 10px;
+  border: 2px solid #444
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+.navbar h1 a {
+  text-decoration: none;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #444;
+}
+
+div.searchbox{
+  display: flex;
+  align-content: space-between
+}
+.searchbox input{
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  padding: 3px;
+  border: rgb(32, 29, 29) 2px solid
+}
+.search__icon{
+  margin: 3px 3px;
+}
+
+
+
