@@ -16,6 +16,7 @@
 }
 
 .grid-gallery .image img{
+    border-radius: 7px;
     max-width: 100%;
 }
 .grid-gallery .image h2{

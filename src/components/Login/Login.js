@@ -16,20 +16,21 @@ class Login extends Component {
                     {/* <div role='alert'>
                         {error && <p className='red'>{error}</p>}
                     </div> */}
-                    <div className='user_name'>
-                        <label htmlFor='LoginForm__user_name'>
-                            User name
+                    <div className='email'>
+                        <label htmlFor='LoginForm__email'>
+                            Email
                         </label>
                         <Input
                             required
-                            name='user_name'
-                            id='LoginForm__user_name'>
+                            name='email'
+                            type='email'
+                            id='LoginForm__email'>
                         </Input>
                     </div>
                     <div className='password'>
                         <label htmlFor='LoginForm__password'>
                             Password
-          </label>
+                        </label>
                         <Input
                             required
                             name='password'
@@ -39,7 +40,7 @@ class Login extends Component {
                     </div>
                     <Button type='submit'>
                         Login
-        </Button>
+                    </Button>
                 </form>
 
 

@@ -42,9 +42,12 @@ class App extends Component {
               component={MyWall}
             />
             <Route
-            path={'/image-details'}
+            path={'/images/:imageId'}
               component={ImageDetails}
             />
+            {/* <Route
+              component={NotFoundPage}
+            /> */}
           </Switch>
         </main>
       </div>

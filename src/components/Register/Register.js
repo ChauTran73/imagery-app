@@ -26,14 +26,15 @@ class Register extends Component {
                             id='RegisterForm__full_name'>
                         </Input>
                     </div>
-                    <div className='user_name'>
-                        <label htmlFor='RegisterForm__user_name'>
-                            User name
+                    <div className='email'>
+                        <label htmlFor='RegisterForm__email'>
+                            Email
                         </label>
                         <Input
                             required
-                            name='user_name'
-                            id='RegisterForm__user_name'>
+                            name='email'
+                            type= 'email'
+                            id='RegisterForm__email'>
                         </Input>
                     </div>
                     <div className='password'>
