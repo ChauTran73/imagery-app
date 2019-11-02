@@ -19,7 +19,7 @@ class AddImage extends Component {
         }
         
         return (
-            <div class="container">
+            <div className="container">
                 <section>
                     <header>
                         <h1>Add New Image</h1>
