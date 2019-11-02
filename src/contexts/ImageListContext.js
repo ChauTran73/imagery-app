@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 const ImageListContext = React.createContext({
   imageList: [],
   error: null,
+  loading: true,
   setError: () => {},
   clearError: () => {},
   setImageList: () => {},
@@ -15,8 +16,14 @@ export class ImageListProvider extends Component {
     error: null,
   };
 
+  // setImageList = imageList => {
+  //   this.setState({ imageList })
+  //   console.log(this.imageList)
+  // }
   setImageList = imageList => {
-    this.setState({ imageList })
+    this.setState({imageList}, function () {
+      console.log(this.imageList);
+  });
   }
 
   setError = error => {
@@ -37,9 +44,12 @@ export class ImageListProvider extends Component {
       setImageList: this.setImageList,
     }
     return (
+      <div>
+      {this.loading ? <div>Loading Images...</div> :
       <ImageListContext.Provider value={value}>
         {this.props.children}
-      </ImageListContext.Provider>
+      </ImageListContext.Provider>}
+      </div>
     )
   }
 }

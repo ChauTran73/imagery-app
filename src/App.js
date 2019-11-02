@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
-import Gallery from './components/Gallery/Gallery';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import MyWall from './components/MyWall/MyWall';
-
 import { Route, Switch } from 'react-router-dom'
-import ImageDetails from './components/ImageDetails/ImageDetails';
+import ImagePage from './routes/ImagePage/ImagePage';
+import ImageListPage from './routes/ImageListPage/ImageListPage';
 
 class App extends Component {
   state = { hasError: false }
@@ -27,7 +26,7 @@ class App extends Component {
             <Route
               exact
               path={'/'}
-              component={Gallery}
+              component={ImageListPage}
             />
             <Route
               path={'/login'}
@@ -43,7 +42,7 @@ class App extends Component {
             />
             <Route
             path={'/images/:imageId'}
-              component={ImageDetails}
+              component={ImagePage}
             />
             {/* <Route
               component={NotFoundPage}
