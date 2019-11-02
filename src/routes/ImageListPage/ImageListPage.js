@@ -1,24 +1,32 @@
 import React, { Component } from 'react'
-import ImageListContext from '../../contexts/ImageListContext'
-
+import ImageApiService from '../../services/image-api-service'
 import { Section } from '../../components/Utils/Utils'
-import ImageDetails from '../../components/ImageDetails/ImageDetails'
+import ImageListItem from '../../components/ImageListItem/ImageListItem'
 import './ImageListPage.css'
 
 export default class ImageListPage extends Component {
-  static contextType = ImageListContext
+  state= {
+    imageList: [],
+    loading: true,
+    // error: null
+  }
+  
+  setImageList = imageList => {
+    this.setState({imageList}, function () {
+      console.log(this.state.imageList);
+  });
+  }
 
   componentDidMount() {
-    this.context.clearError()
     ImageApiService.getImages()
-      .then(this.context.setImageList)
-      .catch(this.context.setError)
+    .then(resJson => this.setImageList(resJson))
+    .catch(error => console.log(error))
+      
   }
 
   renderImages() {
-    const { imageList = [] } = this.context
-    return imageList.map(image =>
-      <ImageDetails
+    return this.state.imageList.map(image =>
+      <ImageListItem
         key={image.id}
         image={image}
       />

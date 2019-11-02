@@ -1,16 +1,45 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ImageContext from '../../contexts/ThingContext'
-import ImageApiService from '../../services/thing-api-service'
+import ImageContext from '../../contexts/ImageContext'
+import ImageApiService from '../../services/image-api-service'
 import { Hyph, Section } from '../../components/Utils/Utils'
-// import { ThingStarRating } from '../../components/ThingStarRating/ThingStarRating'
 import CommentForm from '../../components/CommentForm/CommentForm'
 import './ImagePage.css'
 
+const nullImage = {
+  author: {},
+}
 export default class ImagePage extends Component {
   static defaultProps = {
     match: { params: {} },
   }
+
+  state = {
+    image: nullImage,
+    error: null,
+    comments: [],
+  };
+
+  setImage = image => {
+    this.setState({ image })
+  }
+
+  setComments = comments => {
+    this.setState({ comments })
+  }
+
+  clearImage = () => {
+    this.setImage(nullImage)
+    this.setComments([])
+  }
+
+  addComment = comment => {
+    this.setComments([
+      ...this.state.comments,
+      comment
+    ])
+  }
+
 
   static contextType = ImageContext
 
@@ -18,31 +47,37 @@ export default class ImagePage extends Component {
     const { imageId } = this.props.match.params
     this.context.clearError()
     ImageApiService.getImage(imageId)
-      .then(this.context.setImage)
+      // .then(this.context.setImage)
+      .then(resJson => this.setImage(resJson))
       .catch(this.context.setError)
     ImageApiService.getImageComments(imageId)
-      .then(this.context.setComments)
+      // .then(this.context.setComments)
+      .then(resJson => this.setComments(resJson))
       .catch(this.context.setError)
   }
 
   componentWillUnmount() {
-    this.context.clearImage()
+    // this.context.clearImage()
+    this.clearImage()
   }
 
   renderImage() {
-    const { image, comments } = this.context
+    // const { image, comments } = this.context
+    const { error, image, comments} = this.state
     return <>
-      <div className='ImagePage__image' style={{backgroundImage: `url(${image.image_url})`}} />
+      <div className='ImagePage__image' />
+      <img src= {`${image.url}`}/>
       <h2>{image.title}</h2>
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
-      <CommentForm />
+      {/* <CommentForm /> */}
     </>
   }
 
   render() {
-    const { error, image} = this.context
-    let dontent
+    // const { error, image} = this.context
+    const { error, image} = this.state
+    let content
     if (error) {
       content = (error.error === `Image doesn't exist`)
         ? <p className='red'>Image not found</p>
@@ -70,15 +105,10 @@ function ImageDesc({ image }) {
 
 function ImageComments({ comments = [] }) {
   return (
-    <ul className='ImagePage__comments-list'>
+    <ul className='ImagePage__comment-list'>
       {comments.map(comment =>
         <li key={comment.id} className='ImagePage__comment'>
           <p className='ImagePage__comment-text'>
-            {/* <FontAwesomeIcon
-              size='lg'
-              icon='quote-left'
-              className='ImagePage__review-icon blue'
-            /> */}
             {comment.text}
           </p>
           <p className='ImagePage__comment-user'>

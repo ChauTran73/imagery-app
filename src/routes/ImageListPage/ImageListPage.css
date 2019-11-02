@@ -1,0 +1,30 @@
+.ImageListPage {
+    width: 1200px;
+    margin : 20px auto;
+    columns: 4;
+    column-gap: 10px
+}
+
+@media (max-width: 1200px){
+    .ImageListPage{
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0
+    }
+}
+@media (max-width: 768px){
+    .ImageListPage{
+        columns: 2;
+        
+    }
+}
+@media (max-width: 480px){
+    .ImageListPage{
+        columns: 1;
+        
+    }
+}
+
+
+
