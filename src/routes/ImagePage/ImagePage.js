@@ -39,30 +39,31 @@ export default class ImagePage extends Component {
       comment
     ])
   }
+  setError = error => {
+    console.error(error)
+    this.setState({ error })
+  }
 
-
-  static contextType = ImageContext
+  clearError = () => {
+    this.setState({ error: null })
+  }
 
   componentDidMount() {
     const { imageId } = this.props.match.params
-    this.context.clearError()
-    ImageApiService.getImage(imageId)
-      // .then(this.context.setImage)
+    // this.context.clearError()
+    ImageApiService.getImage(imageId) 
       .then(resJson => this.setImage(resJson))
-      .catch(this.context.setError)
+      .catch(this.setError)
     ImageApiService.getImageComments(imageId)
-      // .then(this.context.setComments)
       .then(resJson => this.setComments(resJson))
-      .catch(this.context.setError)
+      .catch(this.setError)
   }
 
   componentWillUnmount() {
-    // this.context.clearImage()
     this.clearImage()
   }
 
   renderImage() {
-    // const { image, comments } = this.context
     const { error, image, comments} = this.state
     return <>
       <div className='ImagePage__image' />
@@ -70,7 +71,7 @@ export default class ImagePage extends Component {
       <h2>{image.title}</h2>
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
-      {/* <CommentForm /> */}
+      <CommentForm />
     </>
   }
 

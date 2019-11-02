@@ -10,10 +10,10 @@ export default class ReviewForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault()
     const { image } = this.context
-    const { text, like } = ev.target
+    const { text } = ev.target
 
     ImageApiService.postComment(image.id, text.value)
-      .then(this.context.addReview)
+      .then(this.context.addComment)
       .then(() => {
         text.value = ''
       })
