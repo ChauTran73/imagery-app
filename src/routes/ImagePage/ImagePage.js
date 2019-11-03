@@ -50,7 +50,7 @@ export default class ImagePage extends Component {
 
   componentDidMount() {
     const { imageId } = this.props.match.params
-    // this.context.clearError()
+    this.clearError()
     ImageApiService.getImage(imageId) 
       .then(resJson => this.setImage(resJson))
       .catch(this.setError)

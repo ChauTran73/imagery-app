@@ -26,6 +26,12 @@ export class ImageListProvider extends Component {
   });
   }
 
+  addImage = image => {
+    this.setImageList([
+      ...this.state.imageList, image
+    ])
+  }
+
   setError = error => {
     console.error(error)
     this.setState({ error })

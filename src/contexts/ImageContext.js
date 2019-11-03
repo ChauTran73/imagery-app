@@ -39,6 +39,8 @@ export class ImageProvider extends Component {
     this.setState({ image })
   }
 
+  
+
   setComments = comments => {
     this.setState({ comments })
   }

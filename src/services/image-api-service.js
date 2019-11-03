@@ -24,6 +24,24 @@ const ImageApiService = {
           : res.json()
       )
   },
+  postImage(title, description, image_url){
+    return fetch(`${config.API_ENDPOINT}/images`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body : JSON.stringify({
+         title,
+         description,
+         image_url,
+        }),
+    })
+    .then(res => 
+      (!res.ok)
+           ? res.json().then(e => Promise.reject(e))
+            : res.json()
+          )
+  },
   getImageComments(imageId) {
     return fetch(`${config.API_ENDPOINT}/images/${imageId}/comments`)
       .then(res =>
