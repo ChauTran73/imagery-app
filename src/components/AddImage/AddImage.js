@@ -11,15 +11,21 @@ class AddImage extends Component {
 
     state = {
         selectedFile: null,
-        error: null
+        error: null,
+        
     }
     fileSelectedHandler = evt => {
         console.log(evt.target)
     }
 
+    
+    handleSubmitImageSuccess = () => {
+        console.log('added image successfully')
+        
+    }
+
     handleSubmitImage = evt => {
         evt.preventDefault();
-        const { imageList } = this.context;
 
         const { title, desc, img_url } = evt.target
         ImageApiService.postImage(title.value, desc.value, img_url.value)
@@ -28,6 +34,8 @@ class AddImage extends Component {
                 title.value = ''
                 desc.value = ''
                 img_url.value = ''
+                alert('Added image successfully')
+                this.handleSubmitImageSuccess()
             })
             .catch(this.context.setError)
 
@@ -38,7 +46,7 @@ class AddImage extends Component {
         if (!this.props.isShowing) {
             return null;
         }
-
+        
         return (
             <div className="container">
                 <section>
