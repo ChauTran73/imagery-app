@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './MyWall.css';
 import { Button, Input } from '../Utils/Utils'
 import AddImage from '../AddImage/AddImage'
-import ImageListPage from '../../routes/ImageListPage/ImageListPage'
+import MyPins from '../../routes/MyPins/MyPins'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus} from "@fortawesome/free-solid-svg-icons"
 
@@ -23,9 +23,15 @@ class MyWall extends Component {
                    <FontAwesomeIcon icon={faPlus} size="lg"/>
                 </button>
                 <AddImage isShowing={this.state.isShowing} handleClose={this.toggleModal}/>
-                <h1>My Pins</h1>
+                <section className='my_pins'>
+                    <h1>My Pins</h1>
+                    <div>
+                        <MyPins/>
+                    </div>
+                </section>
+               
                            
-                <ImageListPage/>
+                
             </main>
         );
     }
