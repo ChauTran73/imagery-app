@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import LoginPage from './routes/LoginPage/LoginPage';
-import Register from './components/Register/Register';
+import RegistrationPage from './routes/RegistrationPage/RegistrationPage';
 import MyWall from './components/MyWall/MyWall';
 import { Route, Switch } from 'react-router-dom'
 import ImagePage from './routes/ImagePage/ImagePage';
@@ -34,7 +34,7 @@ class App extends Component {
             />
             <Route
               path={'/register'}
-              component={Register}
+              component={RegistrationPage}
             />
             <Route
             path={'/my_wall'}
