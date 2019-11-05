@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
-import Login from './components/Login/Login';
+import LoginPage from './routes/LoginPage/LoginPage';
 import Register from './components/Register/Register';
 import MyWall from './components/MyWall/MyWall';
 import { Route, Switch } from 'react-router-dom'
@@ -30,7 +30,7 @@ class App extends Component {
             />
             <Route
               path={'/login'}
-              component={Login}
+              component={LoginPage}
             />
             <Route
               path={'/register'}
