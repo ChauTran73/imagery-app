@@ -4,7 +4,8 @@
   align-items: right;
   justify-content: space-around;
   padding-top: 10px;
-  border: 2px solid #444
+  border: 2px solid #444;
+  cursor: pointer;
 }
 
 .navbar h1 {
