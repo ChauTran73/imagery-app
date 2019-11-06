@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App__header'>
-          <NavBar isLoggedin={this.state.isLoggedin}/>
+          <NavBar/>
         </header>
         <main className='App__main'>
           {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}
