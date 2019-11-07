@@ -4,6 +4,7 @@ import { Button, Input } from '../Utils/Utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
+import UserService from '../../services/user-service';
 
 
 class LoginForm extends Component {
@@ -26,6 +27,7 @@ class LoginForm extends Component {
                 username.value = ''
                 password.value = ''
                 TokenService.saveAuthToken(res.authToken)
+                UserService.saveUser(res.sub)
                 this.props.onLoginSuccess()
             })
             .catch(res => {

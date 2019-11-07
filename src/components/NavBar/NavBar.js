@@ -5,12 +5,13 @@ import TokenService from '../../services/token-service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import UserService from '../../services/user-service';
 
 class NavBar extends Component {
 
     handleLogoutClick = () => {
         TokenService.clearAuthToken();
-        this.setState({isLoggedin: false})
+
     }
     renderLogoutLink() { //when the user has already logged in
         return (
@@ -18,13 +19,16 @@ class NavBar extends Component {
                 <Link to='/my-wall' >
                     My Wall
                 </Link>
-                {' '}
+                {'  '}
                 <Link
                     onClick={this.handleLogoutClick}
                     to='/'>
                     Logout
                 </Link>
-
+                {'  '}
+                <Link to='/my_wall'>
+                    Logged in as {UserService.getUser()}
+                </Link>
             </div>
         )
     }
@@ -42,6 +46,7 @@ class NavBar extends Component {
         )
     }
     render() {
+
         return (
             <nav className='navbar'>
                 <h1>
@@ -59,11 +64,11 @@ class NavBar extends Component {
                     Home
                 </Link>
 
-                {/* {TokenService.hasAuthToken()
+                {TokenService.hasAuthToken()
                     ? this.renderLogoutLink()
                     : this.renderLoginLink()
-                } */}
-                {this.state.isLoggedin ? this.renderLogoutLink : this.renderLoginLink}
+                }
+
             </nav>
         );
     }
