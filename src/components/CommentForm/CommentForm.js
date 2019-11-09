@@ -4,7 +4,7 @@ import ImageApiService from '../../services/image-api-service'
 import { Button, Textarea } from '../Utils/Utils'
 import './CommentForm.css'
 
-export default class ReviewForm extends Component {
+export default class CommentForm extends Component {
   static contextType = ImageContext
 
   handleSubmit = ev => {
