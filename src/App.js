@@ -6,9 +6,15 @@ import MyWall from './components/MyWall/MyWall';
 import { Route, Switch } from 'react-router-dom'
 import ImagePage from './routes/ImagePage/ImagePage';
 import ImageListPage from './routes/ImageListPage/ImageListPage';
+import TokenService from './services/token-service'
+import UserService from './services/user-service';
 
 class App extends Component {
-  state = { hasError: false }
+  state = { 
+    hasError: false,
+    isLoggedIn: TokenService.hasAuthToken(),
+    hasUser: UserService.hasUser(),
+   }
 
   static getDerivedStateFromError(error) {
     console.error(error)
@@ -18,7 +24,8 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App__header'>
-          <NavBar/>
+          <NavBar hasUser={this.state.hasUser}
+           isLoggedIn={this.state.isLoggedIn} />
         </header>
         <main className='App__main'>
           {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}
@@ -30,14 +37,14 @@ class App extends Component {
             />
             <Route
               path={'/login'}
-              component={LoginPage}
+              render= {(props) => <LoginPage {...props}/>}
             />
             <Route
               path={'/register'}
               component={RegistrationPage}
             />
             <Route
-            path={'/my_wall'}
+            path={'/my-wall'}
               component={MyWall}
             />
             <Route

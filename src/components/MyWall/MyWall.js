@@ -26,7 +26,7 @@ class MyWall extends Component {
                 <section className='my_pins'>
                     <h1>My Pins</h1>
                     <div>
-                        <MyPins/>
+                        
                     </div>
                 </section>
                

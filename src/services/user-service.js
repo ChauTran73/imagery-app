@@ -1,9 +1,17 @@
+import config from '../config'
+
 const UserService = {
     saveUser(user) {
-        window.localStorage.setItem('User Name', user)
+        window.localStorage.setItem(config.USER_NAME, user)
     },
-    getUser(user){
-        return window.localStorage.getItem('User Name')
-    }
+    getUser(){
+        return window.localStorage.getItem(config.USER_NAME)
+    },
+    clearUser(){
+        window.localStorage.removeItem(config.USER_NAME)
+    },
+    hasUser() {
+        return !!this.getUser()
+      },
 }
 export default UserService;

@@ -8,12 +8,32 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import UserService from '../../services/user-service';
 
 class NavBar extends Component {
-
+    //navbar only re-renders when there is a state change
+    //login success => save token and user in local storage -> setState isLoggedin true, hasUser true
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoggedIn: TokenService.hasAuthToken(),
+            hasUser: UserService.hasUser(),
+        }
+               
+        console.log(props)
+      }
+    state = {
+        isLoggedIn: TokenService.hasAuthToken(),
+        hasUser: UserService.hasUser(),
+       
+    }
+   
     handleLogoutClick = () => {
         TokenService.clearAuthToken();
-
+        UserService.clearUser();
+        this.setState({isLoggedIn: false, hasUser: false})
     }
+    
     renderLogoutLink() { //when the user has already logged in
+        //a change of state renders this UI
+        
         return (
             <div className='Navbar_logged-in'>
                 <Link to='/my-wall' >
@@ -26,7 +46,7 @@ class NavBar extends Component {
                     Logout
                 </Link>
                 {'  '}
-                <Link to='/my_wall'>
+                <Link to= 'my_wall'>
                     Logged in as {UserService.getUser()}
                 </Link>
             </div>
@@ -35,7 +55,7 @@ class NavBar extends Component {
     renderLoginLink() { //when the user has not logged in
         return (
             <div className='Navbar__not-logged-in'>
-                <Link to='/login'>
+                <Link to='/login' >
                     Login
                 </Link>
 
@@ -64,9 +84,9 @@ class NavBar extends Component {
                     Home
                 </Link>
 
-                {TokenService.hasAuthToken()
+                {this.state.isLoggedIn && this.state.hasUser
                     ? this.renderLogoutLink()
-                    : this.renderLoginLink()
+                    : this.renderLoginLink() 
                 }
 
             </nav>

@@ -28,7 +28,7 @@ class LoginForm extends Component {
                 password.value = ''
                 TokenService.saveAuthToken(res.authToken)
                 UserService.saveUser(res.sub)
-                this.props.onLoginSuccess()
+                this.props.onLoginSuccess() //redirect to the homepage
             })
             .catch(res => {
                 this.setState({ error: res.error })
