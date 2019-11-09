@@ -1,6 +1,6 @@
 import config from '../config'
 
-//this authapiservice allows client to interact with the api endpoint
+//this authapiservice allows client to interact with the api endpoint concerning authentication
 const AuthApiService = {
   postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {

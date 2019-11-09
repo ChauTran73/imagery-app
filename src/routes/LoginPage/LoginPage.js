@@ -15,7 +15,7 @@ export default class LoginPage extends Component {
     const { location, history } = this.props
     const destination = (location.state || {}).from || '/'
     history.push(destination)
-    this.setState({isLoggedin: true, hasUser: true})
+    // this.setState({isLoggedin: true, hasUser: true})
 
   }
 

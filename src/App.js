@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import LoginPage from './routes/LoginPage/LoginPage';
 import RegistrationPage from './routes/RegistrationPage/RegistrationPage';
-import MyWall from './components/MyWall/MyWall';
-import { Route, Switch } from 'react-router-dom'
+import PersonalPage from './routes/PersonalPage/PersonalPage';
 import ImagePage from './routes/ImagePage/ImagePage';
 import ImageListPage from './routes/ImageListPage/ImageListPage';
 import TokenService from './services/token-service'
@@ -45,7 +45,7 @@ class App extends Component {
             />
             <Route
             path={'/my-wall'}
-              component={MyWall}
+              component={PersonalPage}
             />
             <Route
             path={'/images/:imageId'}

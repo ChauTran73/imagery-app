@@ -1,5 +1,5 @@
 import config from '../config'
-// import TokenService from './token-service';
+import TokenService from './token-service';
 
 //this service file contains functions for client to interact with API endpoints
 
@@ -28,7 +28,8 @@ const ImageApiService = {
     return fetch(`${config.API_ENDPOINT}/images`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
       },
       body : JSON.stringify({
          title,
@@ -50,25 +51,24 @@ const ImageApiService = {
           : res.json()
       )
   },
-  // postComment(imageId, text, rating) {
-  //   return fetch(`${config.API_ENDPOINT}/comments`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //       'authorization': `basic ${TokenService.getAuthToken()}`
-  //     },
-  //     body: JSON.stringify({
-  //       thing_id: thingId,
-  //       rating,
-  //       text,
-  //     }),
-  //   })
-  //     .then(res =>
-  //       (!res.ok)
-  //         ? res.json().then(e => Promise.reject(e))
-  //         : res.json()
-  //     )
-  // }
+  postComment(imageId, text) {
+    return fetch(`${config.API_ENDPOINT}/comments`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({
+        image_id: imageId,
+        text,
+      }),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  }
 }
 
 export default ImageApiService;

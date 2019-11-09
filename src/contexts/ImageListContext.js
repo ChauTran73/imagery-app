@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 const ImageListContext = React.createContext({
   imageList: [],
+  personalImageList: [],
   error: null,
   loading: true,
   setError: () => {},
@@ -13,6 +14,7 @@ export default ImageListContext
 export class ImageListProvider extends Component {
   state = {
     imageList: [],
+    personalImageList: [],
     error: null,
   };
 
@@ -26,9 +28,11 @@ export class ImageListProvider extends Component {
   });
   }
 
-  addImage = image => {
-    this.setImageList([
-      ...this.state.imageList, image
+  addImage = image => { //not sure if this works?
+    this.setImageList(
+      [
+      ...this.state.imageList, image,
+      ...this.state.personalImageList, image
     ])
   }
 
@@ -44,6 +48,7 @@ export class ImageListProvider extends Component {
   render() {
     const value = {
       imageList: this.state.imageList,
+      personalImageList: this.state.personalImageList,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,

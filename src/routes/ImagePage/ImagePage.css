@@ -1,5 +1,5 @@
-.ImagePage__image {
-    height: 10vw;
+.ImagePage__image img{
+    height: 100px;
     min-height: 50px;
     background-size: cover;
     background-position: 50% 50%;

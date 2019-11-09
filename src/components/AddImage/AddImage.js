@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class AddImage extends Component {
     static contextType = ImageListContext
-
+    static defaultProps = {
+        handleAddImage: () => { }
+    }
     state = {
         selectedFile: null,
         error: null,
@@ -18,11 +20,6 @@ class AddImage extends Component {
         console.log(evt.target)
     }
 
-    
-    handleSubmitImageSuccess = () => {
-        console.log('added image successfully')
-        
-    }
 
     handleSubmitImage = evt => {
         evt.preventDefault();
@@ -35,7 +32,7 @@ class AddImage extends Component {
                 desc.value = ''
                 img_url.value = ''
                 alert('Added image successfully')
-                this.handleSubmitImageSuccess()
+                this.props.handleAddImage()
             })
             .catch(this.context.setError)
 

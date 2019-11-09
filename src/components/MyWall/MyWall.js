@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './MyWall.css';
 import { Button, Input } from '../Utils/Utils'
 import AddImage from '../AddImage/AddImage'
-import MyPins from '../../routes/MyPins/MyPins'
+import MyPins from '../../routes/PersonalPage/MyPins'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus} from "@fortawesome/free-solid-svg-icons"
 

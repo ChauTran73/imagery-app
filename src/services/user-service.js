@@ -12,6 +12,6 @@ const UserService = {
     },
     hasUser() {
         return !!this.getUser()
-      },
+    },
 }
 export default UserService;

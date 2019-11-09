@@ -5,6 +5,7 @@ import ImageApiService from '../../services/image-api-service'
 import { Hyph, Section } from '../../components/Utils/Utils'
 import CommentForm from '../../components/CommentForm/CommentForm'
 import './ImagePage.css'
+import moment from 'moment'
 
 const nullImage = {
   author: {},
@@ -67,7 +68,7 @@ export default class ImagePage extends Component {
     const { error, image, comments} = this.state
     return <>
       <div className='ImagePage__image' />
-      <img src= {`${image.url}`}/>
+      <img src= {`${image.url}`} />
       <h2>{image.title}</h2>
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
@@ -100,6 +101,8 @@ function ImageDesc({ image }) {
   return (
     <p className='ImagePage__desc'>
       {image.description}
+      <p><b> - Created by {image.author.full_name}</b></p>
+      On {moment(image.date_created).format('MMMM Do YYYY, h:mm:ss a')}
     </p>
   )
 }
