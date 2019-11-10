@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ImageContext from '../../contexts/ImageContext'
+//import ImageContext, {nullImage} from '../../contexts/ImageContext'
 import ImageApiService from '../../services/image-api-service'
 import { Hyph, Section } from '../../components/Utils/Utils'
 import CommentForm from '../../components/CommentForm/CommentForm'
@@ -8,10 +8,10 @@ import './ImagePage.css'
 import moment from 'moment'
 
 const nullImage = {
-  author: {},
+  author: {}
 }
 export default class ImagePage extends Component {
-  static defaultProps = {
+  static defaultProps = { //this props inherits from router
     match: { params: {} },
   }
 
@@ -23,6 +23,7 @@ export default class ImagePage extends Component {
 
   setImage = image => {
     this.setState({ image })
+    // console.log(image)
   }
 
   setComments = comments => {
@@ -50,34 +51,45 @@ export default class ImagePage extends Component {
   }
 
   componentDidMount() {
-    const { imageId } = this.props.match.params
+    const { imageId } = this.props.match.params //get image id from the params in url
     this.clearError()
     ImageApiService.getImage(imageId) 
       .then(resJson => this.setImage(resJson))
       .catch(this.setError)
+  
+
     ImageApiService.getImageComments(imageId)
-      .then(resJson => this.setComments(resJson))
+      .then(resJson => {
+        this.setComments(resJson)
+      console.log(resJson)})
       .catch(this.setError)
+    
   }
 
   componentWillUnmount() {
     this.clearImage()
+    
   }
 
   renderImage() {
-    const { error, image, comments} = this.state
+     const { error, image, comments} = this.state
+    
     return <>
       <div className='ImagePage__image' />
       <img src= {`${image.url}`} />
       <h2>{image.title}</h2>
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
-      <CommentForm />
+      <CommentForm 
+      image={image} 
+      addComment={this.addComment}
+      setError={this.setError}
+      />
     </>
   }
 
   render() {
-    // const { error, image} = this.context
+  
     const { error, image} = this.state
     let content
     if (error) {
