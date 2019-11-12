@@ -99,11 +99,11 @@ export default class ImagePage extends Component {
 
 function ImageDesc({ image }) {
   return (
-    <p className='ImagePage__desc'>
+    <div className='ImagePage__desc'>
       {image.description}
       <p><b> - Created by {image.author.full_name}</b></p>
       On {moment(image.date_created).format('MMMM Do YYYY, h:mm:ss a')}
-    </p>
+    </div>
   )
 }
 

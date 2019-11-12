@@ -12,17 +12,11 @@ class NavBar extends Component {
     //login success => save token and user in local storage -> setState isLoggedin true, hasUser true
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { //async?
             isLoggedIn: TokenService.hasAuthToken(),
             hasUser: UserService.hasUser(),
         }
                
-        console.log(props)
-      }
-    state = {
-        isLoggedIn: TokenService.hasAuthToken(),
-        hasUser: UserService.hasUser(),
-       
     }
    
     handleLogoutClick = () => {
@@ -32,7 +26,6 @@ class NavBar extends Component {
     }
     
     renderLogoutLink() { //when the user has already logged in
-        //a change of state renders this UI
         
         return (
             <div className='Navbar_logged-in'>

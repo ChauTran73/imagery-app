@@ -4,6 +4,8 @@ import AddImage from '../../components/AddImage/AddImage'
 import ImageApiService from '../../services/image-api-service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import UserService from '../../services/user-service';
+import ImageListItem from '../../components/ImageListItem/ImageListItem'
 
 class PersonalPage extends Component {
     static defaultProps = {
@@ -11,21 +13,32 @@ class PersonalPage extends Component {
         history: {
             push: () => { },
         },
+        match: { params: {} }
     }
     state = { 
         isShowing: false,  
         personalImageList: [],
+        // userId: null,
         loading: true, 
     };
 
     setPersonalImageList = personalImageList => {
+        console.log('my personal images:', personalImageList)
         this.setState({personalImageList})
+        
     }
     
     componentDidMount() {
-        ImageApiService.getImages()
-        .then(resJson => this.setPersonalImageList(resJson))
-        .catch(error => console.log(error))
+      //how do I get all images created by the currently loggedin user and display it here on personal wall
+      //
+        // this.clearError()
+      //get userId of the current logged in user
+     
+        ImageApiService.getImagesByUser()
+          .then(resJson => this.setPersonalImageList(resJson))
+          .catch(this.setError)
+      
+
     }
 
     toggleModal = () => {
@@ -40,6 +53,15 @@ class PersonalPage extends Component {
         history.push(destination)
     }
 
+    renderImages() {
+        return this.state.personalImageList.map(image =>
+          <ImageListItem
+            key={image.id}
+            image={image}
+          />
+        )
+      }
+
     render() {
         return (
             <main >
@@ -48,6 +70,7 @@ class PersonalPage extends Component {
                     <FontAwesomeIcon icon={faPlus} size="lg" />
                 </button>
                 <AddImage 
+                imageList={this.state.personalImageList}
                 isShowing={this.state.isShowing} 
                 handleClose={this.toggleModal}
                 handleAddImage={this.onAddImageSuccess}
@@ -55,7 +78,7 @@ class PersonalPage extends Component {
                 <section className='my_pins'>
                     <h1>My Pins</h1>
                     <div>
-
+                        {this.renderImages()}
                     </div>
                 </section>
 

@@ -14,9 +14,9 @@ const ImageApiService = {
   },
   getImage(imageId) {
     return fetch(`${config.API_ENDPOINT}/images/${imageId}`, {
-    //   headers: {
-    //     'authorization': `basic ${TokenService.getAuthToken()}`
-    //   },
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
     })
       .then(res =>
         (!res.ok)
@@ -43,8 +43,24 @@ const ImageApiService = {
             : res.json()
           )
   },
+  getImagesByUser(userId){ //get images created by the user
+    return fetch(`${config.API_ENDPOINT}/users/images`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+  },
   getImageComments(imageId) {
-    return fetch(`${config.API_ENDPOINT}/images/${imageId}/comments`)
+    return fetch(`${config.API_ENDPOINT}/images/${imageId}/comments`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+    })
       .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
