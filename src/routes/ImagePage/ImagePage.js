@@ -57,7 +57,7 @@ export default class ImagePage extends Component {
       .catch(this.setError)
     ImageApiService.getImageComments(imageId)
       .then(resJson => this.setComments(resJson))
-      .catch(this.setError)
+      .catch(this.setError) 
   }
 
   componentWillUnmount() {

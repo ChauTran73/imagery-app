@@ -1,0 +1,30 @@
+.my_pins {
+    width: 1200px;
+    margin : 20px auto;
+    columns: 4;
+    column-gap: 10px
+}
+
+@media (max-width: 1200px){
+    .my_pins{
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0
+    }
+}
+@media (max-width: 768px){
+    .my_pins{
+        columns: 2;
+        
+    }
+}
+@media (max-width: 480px){
+    .my_pins{
+        columns: 1;
+        
+    }
+}
+
+
+
