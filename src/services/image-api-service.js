@@ -43,6 +43,19 @@ const ImageApiService = {
             : res.json()
           )
   },
+  deleteImage(image_id){
+    return fetch(`${config.API_ENDPOINT}/images/${image_id}`,{
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json() )
+  },
   getImagesByUser(userId){ //get images created by the user
     return fetch(`${config.API_ENDPOINT}/users/images`, {
       headers: {

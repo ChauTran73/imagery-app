@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import MyPins from '../../components/MyPins/MyPins';
 import ImageListItem from '../../components/ImageListItem/ImageListItem'
+import ImageListContext from '../../contexts/ImageListContext'
 
 class PersonalPage extends Component {
     static defaultProps = {
@@ -15,6 +16,9 @@ class PersonalPage extends Component {
         },
         match: { params: {} }
     }
+
+    //static contextType = ImageListContext;
+
     state = {
         isShowingAddImage: false,
         isShowingMyPins: false,
@@ -29,16 +33,10 @@ class PersonalPage extends Component {
     }
 
     componentDidMount() {
-        //how do I get all images created by the currently loggedin user and display it here on personal wall
-        //
         // this.clearError()
-        //get userId of the current logged in user
-
         ImageApiService.getImagesByUser()
             .then(resJson => this.setPersonalImageList(resJson))
             .catch(this.setError)
-
-
     }
 
     toggleModalAddImage = () => {
@@ -83,12 +81,11 @@ class PersonalPage extends Component {
                     handleClose={this.toggleModalAddImage}
                     handleAddImage={this.onAddImageSuccess}
                 />
-
-
-
                 <MyPins
                     myPins={this.state.personalImageList}
                     isShowing={this.state.isShowingMyPins}
+                    handleDeleteImage={this.handleDeleteImage}
+                    onDeleteSuccess = {this.onAddImageSuccess}
                 />
 
 

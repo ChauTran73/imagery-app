@@ -17,16 +17,15 @@ export class ImageListProvider extends Component {
     personalImageList: [],
     error: null,
   };
-
+  async setImageList(imageList){
+    await this.setState({ imageList });
+    console.log(this.state.imageList);
+}
   // setImageList = imageList => {
-  //   this.setState({ imageList })
-  //   console.log(this.imageList)
+  //   this.setState({imageList}, function () {
+  //     console.log(this.imageList);
+  // });
   // }
-  setImageList = imageList => {
-    this.setState({imageList}, function () {
-      console.log(this.imageList);
-  });
-  }
 
   addImage = image => { //not sure if this works?
     this.setImageList(

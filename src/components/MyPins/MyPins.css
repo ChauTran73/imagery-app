@@ -5,6 +5,20 @@
     column-gap: 10px
 }
 
+.ImageItem:hover{
+    opacity: 0.8;
+}
+.delete{
+  position: relative;
+  opacity: 0;
+  transform: translate(100%,-270%);
+  width: 30px;
+  
+}
+.ImageItem:hover .delete {   
+  opacity: 1;
+}
+
 @media (max-width: 1200px){
     .my_pins{
         columns: 3;
