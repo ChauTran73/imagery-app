@@ -12,7 +12,7 @@ class NavBar extends Component {
     //login success => save token and user in local storage -> setState isLoggedin true, hasUser true
     constructor(props) {
         super(props);
-        this.state = { //async?
+        this.state = { //async
             isLoggedIn: TokenService.hasAuthToken(),
             hasUser: UserService.hasUser(),
         }
@@ -32,14 +32,14 @@ class NavBar extends Component {
                 <Link to='/my-wall' >
                     My Wall
                 </Link>
-                {'  '}
+                {'     '}
                 <Link
                     onClick={this.handleLogoutClick}
                     to='/'>
                     Logout
                 </Link>
-                {'  '}
-                <Link to= 'my_wall'>
+                {'      '}
+                <Link to= 'my-wall'>
                     Logged in as {UserService.getUser()}
                 </Link>
             </div>
@@ -51,7 +51,7 @@ class NavBar extends Component {
                 <Link to='/login' >
                     Login
                 </Link>
-
+            {'    '}
                 <Link to='/register'>
                     Register
                 </Link>
