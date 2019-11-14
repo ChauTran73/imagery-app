@@ -24,9 +24,9 @@ a{
 }
 
 
-  .ImageListItem:hover{
+.ImageListItem:hover{
       opacity: 0.8;
-  }
+}
 .pin{
     position: relative;
     opacity: 0;
