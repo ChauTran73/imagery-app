@@ -61,10 +61,6 @@ export default class ImagePage extends Component {
     ImageApiService.getImageComments(imageId)
       .then(resJson => this.setComments(resJson))
       .catch(this.setError) 
-      .then(resJson => {
-        this.setComments(resJson)
-      console.log(resJson)})
-      .catch(this.setError)
     
   }
 
