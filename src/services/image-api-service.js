@@ -85,7 +85,7 @@ const ImageApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+         'authorization': `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         image_id: imageId,

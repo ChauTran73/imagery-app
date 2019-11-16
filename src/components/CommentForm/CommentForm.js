@@ -4,20 +4,25 @@ import ImageApiService from '../../services/image-api-service'
 import { Button, Textarea } from '../Utils/Utils'
 import './CommentForm.css'
 
-export default class ReviewForm extends Component {
-  static contextType = ImageContext
+
+export default class CommentForm extends Component {
+ // static contextType = ImageContext 
 
   handleSubmit = ev => {
     ev.preventDefault()
-    const { image } = this.context
+    // const { image } = this.context
+    //this image is passed from ImagePage and contains info about img and the author who created it
+    const { image }= this.props 
+    console.log(image)
     const { text } = ev.target
 
     ImageApiService.postComment(image.id, text.value)
-      .then(this.context.addComment)
+      // .then(this.context.addComment)
+      .then(this.props.addComment)
       .then(() => {
         text.value = ''
       })
-      .catch(this.context.setError)
+      .catch(this.props.setError)
   }
 
   render() {
