@@ -101,7 +101,7 @@ function ImageDesc({ image }) {
   return (
     <div className='ImagePage__desc'>
       {image.description}
-      <p><b> - Created by {image.author.full_name}</b></p>
+      <p><i> - Created by {image.author.full_name}</i></p>
       On {moment(image.date_created).format('MMMM Do YYYY')}
     </div>
   )
