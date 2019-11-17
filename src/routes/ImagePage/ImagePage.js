@@ -74,14 +74,14 @@ export default class ImagePage extends Component {
     
     return <>
       <div className='ImagePage__image' />
-      <img src= {`${image.url}`} />
-      <h2>{image.title}</h2>
+      <img src= {`${image.url}`} height='500'/>
+     
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
       <CommentForm 
-      image={image} 
-      addComment={this.addComment}
-      setError={this.setError}
+        image={image} 
+        addComment={this.addComment}
+        setError={this.setError}
       />
     </>
   }
@@ -110,8 +110,9 @@ export default class ImagePage extends Component {
 function ImageDesc({ image }) {
   return (
     <div className='ImagePage__desc'>
-      {image.description}
-      <p><i> - Created by {image.author.full_name}</i></p>
+      <h2>{image.title}</h2>
+      <p>{image.description}</p>
+      <p><i> ~ Created by {image.author.full_name} ~</i></p>
       On {moment(image.date_created).format('MMMM Do YYYY, h:mm:ss a')}
     </div>
   )
@@ -123,7 +124,7 @@ function ImageComments({ comments = [] }) {
       {comments.map(comment =>
         <li key={comment.id} className='ImagePage__comment'>
           <p className='ImagePage__comment-text'>
-            {comment.text}
+            {comment.text} 
           </p>
           <p className='ImagePage__comment-user'>
             {/* <ThingStarRating rating={review.rating} /> */}

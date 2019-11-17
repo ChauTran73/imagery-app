@@ -64,7 +64,7 @@ class NavBar extends Component {
             <nav className='navbar'>
                 <h1>
                     <Link to='/'>
-                       <FontAwesomeIcon icon={faImages} size='lg' />
+                       <FontAwesomeIcon icon={faImages} size='lg' className='blue'/>
                         {' '}
                         Imagery
                     </Link>
