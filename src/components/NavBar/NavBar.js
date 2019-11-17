@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './NavBar.css';
 import TokenService from '../../services/token-service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage } from "@fortawesome/free-solid-svg-icons"
+import { faImages } from "@fortawesome/free-solid-svg-icons"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import UserService from '../../services/user-service';
 
@@ -64,8 +64,8 @@ class NavBar extends Component {
             <nav className='navbar'>
                 <h1>
                     <Link to='/'>
+                       <FontAwesomeIcon icon={faImages} size='lg' />
                         {' '}
-                        <FontAwesomeIcon icon='faImage' />
                         Imagery
                     </Link>
                 </h1>
