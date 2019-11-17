@@ -74,7 +74,7 @@ export default class ImagePage extends Component {
     
     return <>
       <div className='ImagePage__image' />
-      <img src= {`${image.url}`} height='500'/>
+      <img src= {`${image.url}`} height='450'/>
      
       <ImageDesc image={image} />
       <ImageComments comments={comments} />
