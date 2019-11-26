@@ -5,6 +5,7 @@ import TokenService from './token-service';
 
 const ImageApiService = {
   getImages() { 
+    console.log(config.API_ENDPOINT)
     return fetch(`${config.API_ENDPOINT}/images`)
       .then(res =>
         (!res.ok)
