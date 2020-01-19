@@ -69,12 +69,12 @@ class PersonalPage extends Component {
         return (
             <main className='my_pins'>
 
-                <Button type="button" onClick={this.toggleModalAddImage} >
+                <button type="button" onClick={this.toggleModalAddImage} >
                     <FontAwesomeIcon icon={faPlus} size="lg" className='blue' />
-                </Button>
-                <Button type="button" onClick={this.toggleModalMyPins} >
+                </button>
+                <button type="button" onClick={this.toggleModalMyPins} >
                    My Pins
-                </Button>
+                </button>
                 <AddImage
                     imageList={this.state.personalImageList}
                     isShowing={this.state.isShowingAddImage}
