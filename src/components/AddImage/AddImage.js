@@ -14,7 +14,7 @@ class AddImage extends Component {
         image: null,
         selectedFile: null,
         error: null,
-        
+
     }
     fileSelectedHandler = evt => {
         console.log(evt.target)
@@ -42,7 +42,7 @@ class AddImage extends Component {
         if (!this.props.isShowing) {
             return null;
         }
-        
+
         return (
             <div className="container">
                 <section>
@@ -88,10 +88,13 @@ class AddImage extends Component {
                             <div>
                                 <input type="file" onChange={this.fileSelectedHandler} />
                             </div>
-                            <Button type="submit">Submit</Button>
+                            <div className='imgForm_Buttons'>
+                                <button type="submit" className='submit_form'>Submit</button>
+                                <button onClick={this.props.handleClose} className='close_form'>Close</button>
+                            </div>
 
                         </form>
-                        <Button onClick={this.props.handleClose}>Close</Button>
+
                     </section>
                 </section>
             </div>
