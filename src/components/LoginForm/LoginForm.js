@@ -68,9 +68,9 @@ class LoginForm extends Component {
                             id='LoginForm__password'>
                         </Input>
                     </div>
-                    <Button type='submit'>
+                    <button type='submit'>
                         Login
-                    </Button>
+                    </button>
                 </form>
 
 
