@@ -86,9 +86,9 @@ class RegistrationForm extends Component {
                             id='RegisterForm__password'>
                         </Input>
                     </div>
-                    <Button type='submit'>
+                    <button type='submit'>
                         Get Started
-                    </Button>
+                    </button>
                 </form>
 
 
