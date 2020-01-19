@@ -19,11 +19,6 @@
     font-size: 20px
 }
 
-a{
-    text-decoration: none;
-}
-
-
 .ImageListItem:hover{
       opacity: 0.8;
 }
@@ -37,5 +32,10 @@ a{
 }
 .ImageListItem:hover .pin {   
     opacity: 1;
-  }
+}
+
+.save-image button{
+    position: absolute;
+    top: -120px;
+}
 
