@@ -16,6 +16,15 @@
    
 }
 
+.main-nav a:hover{
+  opacity: 0.6;
+  
+}
+.main-nav a:focus{
+  color: rgb(173,150,57)
+}
+
+
 h1 > a{
   padding-left: 20px;
 }
