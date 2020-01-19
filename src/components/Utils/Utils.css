@@ -6,7 +6,7 @@
   
   .Input,
   .Textarea {
-    border: 1px solid #ddd;
+    border: var(--my-border);
     display: block;
     font-size: 1.1em;
     margin-bottom: 10px;
