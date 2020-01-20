@@ -52,10 +52,10 @@ const ImageApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json() )
+    .then(res => res)
+    .catch(err => {
+      console.log(err);
+    });
   },
   getImagesByUser(userId){ //get images created by the user
     return fetch(`${config.API_ENDPOINT}/users/images`, {
