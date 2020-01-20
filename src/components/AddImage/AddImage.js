@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './AddImage.css';
-//import ImageListContext from '../../contexts/ImageListContext'
+import ImageListContext from '../../contexts/ImageListContext'
 import ImageApiService from '../../services/image-api-service'
-import { Button, Input } from '../Utils/Utils'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Input } from '../Utils/Utils'
 
 class AddImage extends Component {
-    // static contextType = ImageListContext
+    static contextType = ImageListContext
     static defaultProps = {
-        handleAddImage: () => { }
+       onImageSuccess: () => { }
     }
+
     state = {
         image: null,
         selectedFile: null,
@@ -24,6 +24,11 @@ class AddImage extends Component {
     handleSubmitImage = evt => {
         evt.preventDefault();
         const { title, desc, img_url } = evt.target
+        const newImg = {
+            title: title.value,
+            description: desc.value,
+            img_url: img_url.value
+        }
         ImageApiService.postImage(title.value, desc.value, img_url.value)
             .then(this.props.addImage)
             .then(() => {
@@ -31,9 +36,9 @@ class AddImage extends Component {
                 desc.value = ''
                 img_url.value = ''
                 alert('Added image successfully')
-                this.props.handleAddImage()
+                this.props.onAddImageSuccess()
             })
-            .catch(this.context.setError)
+            .catch(err => console.log(err))
 
     }
     render() {
