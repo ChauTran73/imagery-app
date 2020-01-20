@@ -13,6 +13,10 @@
     border-radius: 7px;
     max-width: 100%;
 }
+.ImageListItem__image:hover{
+    opacity: 0.8;
+}
+
 .ImageListItem h2{
     margin: 2px 0 0;
     padding: 0;
