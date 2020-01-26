@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input } from '../../components/Utils/Utils'
 import AddImage from '../../components/AddImage/AddImage'
-import ImageApiService from '../../services/image-api-service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import MyPins from '../../components/MyPins/MyPins';
@@ -14,30 +12,26 @@ class PersonalPage extends Component {
         history: {
             push: () => { },
         },
-        match: { params: {} }
+        match: { params: {} },
+        personalImageList: []
     }
 
-    //static contextType = ImageListContext;
+    static contextType = ImageListContext;
 
     state = {
         isShowingAddImage: false,
         isShowingMyPins: false,
-        personalImageList: [],
         loading: true,
     };
 
-    setPersonalImageList = personalImageList => {
-        console.log('my personal images:', personalImageList)
-        this.setState({ personalImageList })
-
-    }
-
     componentDidMount() {
-        // this.clearError()
-        ImageApiService.getImagesByUser()
-            .then(resJson => this.setPersonalImageList(resJson))
-            .catch(this.setError)
+        
     }
+
+    handleAddImg = newImg => {
+        this.context.addImage(newImg)
+    }
+
 
     toggleModalAddImage = () => {
         this.setState({
@@ -57,7 +51,7 @@ class PersonalPage extends Component {
     }
 
     renderImages = () => {
-        return this.state.personalImageList.map(image =>
+        return this.context.personalImageList.map(image =>
             <ImageListItem
                 key={image.id}
                 image={image}
@@ -73,23 +67,19 @@ class PersonalPage extends Component {
                     <FontAwesomeIcon icon={faPlus} size="lg" className='blue' />
                 </button>
                 <button type="button" onClick={this.toggleModalMyPins} >
-                   My Pins
+                    My Pins
                 </button>
                 <AddImage
-                    imageList={this.state.personalImageList}
+                    addImage={this.handleAddImg}
                     isShowing={this.state.isShowingAddImage}
                     handleClose={this.toggleModalAddImage}
-                    handleAddImage={this.onAddImageSuccess}
+                    onAddImageSuccess={this.onAddImageSuccess}
                 />
                 <MyPins
-                    myPins={this.state.personalImageList}
+                    myPins={this.context.personalImageList}
                     isShowing={this.state.isShowingMyPins}
-                    handleDeleteImage={this.handleDeleteImage}
-                    onDeleteSuccess = {this.onAddImageSuccess}
+                    onDeleteSuccess={this.onAddImageSuccess}
                 />
-
-
-
 
             </main>
         );
