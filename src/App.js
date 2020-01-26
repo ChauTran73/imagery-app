@@ -6,19 +6,38 @@ import RegistrationPage from './routes/RegistrationPage/RegistrationPage';
 import PersonalPage from './routes/PersonalPage/PersonalPage';
 import ImagePage from './routes/ImagePage/ImagePage';
 import ImageListPage from './routes/ImageListPage/ImageListPage';
-import TokenService from './services/token-service'
-import UserService from './services/user-service';
+import ImageApiService from './services/image-api-service'
 import { Redirect } from 'react-router'
+import ImageListContext from '../src/contexts/ImageListContext'
 
 class App extends Component {
   state = {
     hasError: false,
+    imageList: [],
+    personalImageList: []
+  }
+
+  static contextType = ImageListContext;
+
+  componentDidMount(){
+    ImageApiService.getImages()
+    .then(imageList => {
+      this.context.setImageList(imageList)
+      this.setState({imageList})
+    }
+      )
+    ImageApiService.getImagesByUser()
+    .then(personalImageList => {
+      this.context.setPersonalImageList(personalImageList)
+      this.setState({personalImageList})
+    })
   }
 
   static getDerivedStateFromError(error) {
     console.error(error)
     return { hasError: true }
   }
+
   render() {
     return (
       <div className='App'>
@@ -48,6 +67,7 @@ class App extends Component {
             <Route
               path={'/my-wall'}
               component={PersonalPage}
+             
             />
             <Route
               path={'/images/:imageId'}
