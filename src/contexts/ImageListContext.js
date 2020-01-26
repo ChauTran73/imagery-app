@@ -17,23 +17,37 @@ export class ImageListProvider extends Component {
     personalImageList: [],
     error: null,
   };
-  async setImageList(imageList){
-    await this.setState({ imageList });
-    console.log(this.state.imageList);
-}
-  // setImageList = imageList => {
-  //   this.setState({imageList}, function () {
-  //     console.log(this.imageList);
-  // });
-  // }
 
-  addImage = image => { //not sure if this works?
-    this.setImageList(
-      [
-      ...this.state.imageList, image,
-      ...this.state.personalImageList, image
-    ])
+  setImageList = imageList => {
+    this.setState({imageList})
   }
+
+  setPersonalImageList = personalImageList => {
+    this.setState({personalImageList})
+  }
+
+  addImage = image => {
+    this.setState({
+      imageList:  [
+        ...this.state.imageList, image
+      ],
+      personalImageList: this.state.personalImageList.concat(image)
+    })
+  }
+
+  saveImage = image => {
+    this.setState({
+      personalImageList: this.state.personalImageList.concat(image)
+    })
+  }
+
+  deleteImage = image_id => {
+    let updatedImageList = this.state.imageList.filter(image => image.id !== image_id)
+    this.setState({
+      imageList: [...updatedImageList],
+    })
+  }
+  
 
   setError = error => {
     console.error(error)
@@ -52,6 +66,10 @@ export class ImageListProvider extends Component {
       setError: this.setError,
       clearError: this.clearError,
       setImageList: this.setImageList,
+      setPersonalImageList: this.setPersonalImageList,
+      addImage: this.addImage,
+      saveImage: this.saveImage,
+      deleteImage: this.deleteImage
     }
     return (
       <div>
