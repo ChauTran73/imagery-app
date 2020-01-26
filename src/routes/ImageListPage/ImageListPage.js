@@ -1,34 +1,55 @@
 import React, { Component } from 'react'
-import ImageApiService from '../../services/image-api-service'
 import { Section } from '../../components/Utils/Utils'
 import ImageListItem from '../../components/ImageListItem/ImageListItem'
+import ImageListContext from '../../contexts/ImageListContext'
 import './ImageListPage.css'
 
+
 export default class ImageListPage extends Component {
-  state= {
-    imageList: [],
+  state = {
     loading: true,
-    // error: null
-  }
-  
-  setImageList = imageList => {
-    this.setState({imageList}, function () {
-      console.log(this.state.imageList);
-  });
+    renderSaveButton: false,
   }
 
+  static contextType = ImageListContext
+
   componentDidMount() {
-    ImageApiService.getImages()
-    .then(resJson => this.setImageList(resJson))
-    .catch(error => console.log(error))
+    if (this.props.location.pathname == '/') {
+      this.setState({
+        renderSaveButton: true
+      })
+    }
+  }
+
+  handleSaveImage = img => {
+    const { personalImageList } = this.context
+ 
+    if(personalImageList.length === 0){
+      this.context.saveImage(img)
+      alert('Saved Image!')
+    }
+    else{
+      const result = personalImageList.find(image => image.id === img.id)
+      if (personalImageList.indexOf(result) === -1) {
+        this.context.saveImage(img)
+        alert('Saved Image!')
+      } 
+      else {
+        alert('Image already saved!')
+      }
+    }
       
+
   }
 
   renderImages() {
-    return this.state.imageList.map(image =>
+    const { imageList } = this.context
+    return imageList.map(image =>
       <ImageListItem
         key={image.id}
         image={image}
+        handleSaveImage={this.handleSaveImage}
+        renderSaveButton={this.state.renderSaveButton}
       />
     )
   }
