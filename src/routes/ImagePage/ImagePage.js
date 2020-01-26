@@ -1,94 +1,64 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import ImageContext, {nullImage} from '../../contexts/ImageContext'
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import ImageApiService from '../../services/image-api-service'
 import { Hyph, Section } from '../../components/Utils/Utils'
 import CommentForm from '../../components/CommentForm/CommentForm'
 import './ImagePage.css'
 import moment from 'moment'
+import ImageContext from '../../contexts/ImageContext'
 
-const nullImage = {
-  author: {}
-}
 export default class ImagePage extends Component {
   static defaultProps = { //this props inherits from router
     match: { params: {} },
   }
 
-  state = {
-    image: nullImage,
-    error: null,
-    comments: [],
-  };
+  static contextType = ImageContext;
 
-  setImage = image => {
-    this.setState({ image })
-    // console.log(image)
-  }
-
-  setComments = comments => {
-    this.setState({ comments })
-  }
-
-  clearImage = () => {
-    this.setImage(nullImage)
-    this.setComments([])
-  }
-
-  addComment = comment => {
-    this.setComments([
-      ...this.state.comments,
-      comment
-    ])
-  }
-  setError = error => {
-    console.error(error)
-    this.setState({ error })
-  }
-
-  clearError = () => {
-    this.setState({ error: null })
-  }
 
   componentDidMount() {
     const { imageId } = this.props.match.params //get image id from the params in url
-    this.clearError()
+    this.context.clearError()
     ImageApiService.getImage(imageId) 
-      .then(resJson => this.setImage(resJson))
+      .then(resJson => this.context.setImage(resJson))
       .catch(this.setError)
-  
 
     ImageApiService.getImageComments(imageId)
-      .then(resJson => this.setComments(resJson))
+      .then(resJson => this.context.setComments(resJson))
       .catch(this.setError) 
     
   }
 
   componentWillUnmount() {
-    this.clearImage()
-    
+    this.context.clearImage()
+  }
+
+  deleteComment = id =>{
+    this.context.deleteComment(id)
+    ImageApiService.deleteComment(id)
+    .catch(err => console.log(err))
   }
 
   renderImage() {
-     const { error, image, comments} = this.state
+     const { error, image, comments} = this.context
     
     return <>
       <div className='ImagePage__image' />
       <img src= {`${image.url}`} height='450'/>
-     
       <ImageDesc image={image} />
-      <ImageComments comments={comments} />
+      <h3>Reviews</h3>
+      <ImageComments comments={comments} deleteComment={this.deleteComment}/>
       <CommentForm 
         image={image} 
-        addComment={this.addComment}
-        setError={this.setError}
+        addComment={this.context.addComment}
+        setError={this.context.setError}
       />
     </>
   }
 
   render() {
   
-    const { error, image} = this.state
+    const { error, image} = this.context
     let content
     if (error) {
       content = (error.error === `Image doesn't exist`)
@@ -113,15 +83,16 @@ function ImageDesc({ image }) {
       <h2>{image.title}</h2>
       <p>{image.description}</p>
       <p><i> ~ Created by {image.author.full_name} ~</i></p>
-      On {moment(image.date_created).format('MMMM Do YYYY')}
+      <p> On {moment(image.date_created).format('MMMM Do YYYY')}</p>
     </div>
   )
 }
 
-function ImageComments({ comments = [] }) {
+function ImageComments({ comments = [], deleteComment }) {
   return (
     <ul className='ImagePage__comment-list'>
-      {comments.map(comment =>
+    {comments.length == 0 ? <b>No comments at this moment!</b> : 
+      comments.map(comment =>
         <li key={comment.id} className='ImagePage__comment'>
           <p className='ImagePage__comment-text'>
             {comment.text} 
@@ -129,10 +100,17 @@ function ImageComments({ comments = [] }) {
           <p className='ImagePage__comment-user'>
             {/* <ThingStarRating rating={review.rating} /> */}
             <Hyph />
-            {comment.user.full_name}
+            {comment.user.full_name}   {'  '}
+            {localStorage.getItem('user_id') == comment.user.id ? 
+            <span onClick={() => deleteComment(comment.id)}>
+              <FontAwesomeIcon icon={faTrash} style={{color: 'red'}}/>
+            </span> :  null}
           </p>
+          
         </li>
+
       )}
+      
     </ul>
   )
 }
