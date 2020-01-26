@@ -113,7 +113,7 @@ function ImageDesc({ image }) {
       <h2>{image.title}</h2>
       <p>{image.description}</p>
       <p><i> ~ Created by {image.author.full_name} ~</i></p>
-      On {moment(image.date_created).format('MMMM Do YYYY, h:mm:ss a')}
+      On {moment(image.date_created).format('MMMM Do YYYY')}
     </div>
   )
 }
