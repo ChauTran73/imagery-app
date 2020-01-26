@@ -1,30 +1,39 @@
 import React, { Component } from 'react';
 import ImageListItem from '../../components/ImageListItem/ImageListItem'
 import ImageApiService from '../../services/image-api-service'
-import { Button } from '../Utils/Utils'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import './MyPins.css'
+import ImageListContext from '../../contexts/ImageListContext'
 
 class MyPins extends Component {
-  handleDeleteImage(id) {
-    ImageApiService.deleteImage(id)
-      .then(alert('Deleted Image! Please refresh the page for now...'))
-      
-      .catch(err => console.log(err))
+  constructor(props){
+    super(props);
+    this.state = {
+      imageList: props.myPins,
+      renderDeleteButton: false
+    }
   }
+ 
+  static contextType = ImageListContext
+
+  handleDeleteImage = image_id => {
+    const updatedImages = this.context.personalImageList.filter(image => image.id !== image_id)
+    this.context.setPersonalImageList(updatedImages)
+    this.context.deleteImage(image_id)
+    ImageApiService.deleteImage(image_id)
+    .then(alert('Deleted successfully!'))
+    .catch(err => alert(err.message))
+}
+
+
   renderImages() {
     return this.props.myPins.map((image, index) =>
       <div className='ImageItem' key={index}>
         <ImageListItem
           key={image.id}
           image={image}
+          handleDeleteImage={this.handleDeleteImage}
         />
-        <Button onClick={() => this.handleDeleteImage(image.id)}>
-          <FontAwesomeIcon icon={faTrash} size="lg" />
-        </Button>
-
-        
-        </div>
+      </div>
     )
   }
   render() {
@@ -32,13 +41,10 @@ class MyPins extends Component {
       return null;
     }
     return (
-      <div className='my_pins'>
-        {this.renderImages()}
+      <div className='Pins_Gallery'>
+        {this.props.myPins.length > 0 ? this.renderImages() : 'No pins at the moment!'}
       </div>
     );
   }
-
-
-
 };
 export default MyPins;
