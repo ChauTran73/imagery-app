@@ -1,5 +1,6 @@
 .CommentForm{
     padding: 5px 5px;
     position: relative;
-    
+    width: 50%;
+    margin: 0 auto;
 }
