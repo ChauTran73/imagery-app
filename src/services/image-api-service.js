@@ -81,6 +81,19 @@ const ImageApiService = {
           : res.json()
       )
   },
+  deleteComment(id){
+    return fetch(`${config.API_ENDPOINT}/comments/${id}`,{
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res => res)
+    .catch(err => {
+      console.log(err);
+    });
+  },
   postComment(imageId, text) {
     return fetch(`${config.API_ENDPOINT}/comments`, {
       method: 'POST',
