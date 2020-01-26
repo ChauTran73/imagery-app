@@ -16,19 +16,19 @@ class AddImage extends Component {
         error: null,
 
     }
-    fileSelectedHandler = evt => {
-        console.log(evt.target)
-    }
+    // fileSelectedHandler = evt => {
+    //     console.log(evt.target)
+    // }
 
 
     handleSubmitImage = evt => {
         evt.preventDefault();
         const { title, desc, img_url } = evt.target
-        const newImg = {
-            title: title.value,
-            description: desc.value,
-            img_url: img_url.value
-        }
+        // const newImg = {
+        //     title: title.value,
+        //     description: desc.value,
+        //     img_url: img_url.value
+        // }
         ImageApiService.postImage(title.value, desc.value, img_url.value)
             .then(this.props.addImage)
             .then(() => {
@@ -90,9 +90,9 @@ class AddImage extends Component {
                                     id='AddImageForm__url'>
                                 </Input>
                             </div>
-                            <div>
+                            {/* <div>
                                 <input type="file" onChange={this.fileSelectedHandler} />
-                            </div>
+                            </div> */}
                             <div className='imgForm_Buttons'>
                                 <button type="submit" className='submit_form'>Submit</button>
                                 <button onClick={this.props.handleClose} className='close_form'>Close</button>
