@@ -46,7 +46,7 @@ export default class ImagePage extends Component {
       <div className='ImagePage__image' />
       <img src= {`${image.url}`} height='450'/>
       <ImageDesc image={image} />
-      <h3>Reviews</h3>
+      <h3>Comments</h3>
       <ImageComments comments={comments} deleteComment={this.deleteComment}/>
       <CommentForm 
         image={image} 
@@ -82,8 +82,8 @@ function ImageDesc({ image }) {
     <div className='ImagePage__desc'>
       <h2>{image.title}</h2>
       <p>{image.description}</p>
-      <p><i> ~ Created by {image.author.full_name} ~</i></p>
-      <p> On {moment(image.date_created).format('MMMM Do YYYY')}</p>
+      <p> By <i> {image.author.full_name} </i></p>
+      <p> Created on {moment(image.date_created).format('MMMM Do YYYY')}</p>
     </div>
   )
 }
@@ -98,7 +98,7 @@ function ImageComments({ comments = [], deleteComment }) {
             {comment.text} 
           </p>
           <p className='ImagePage__comment-user'>
-            {/* <ThingStarRating rating={review.rating} /> */}
+            {/* <StarRating rating={comment.rating} /> */}
             <Hyph />
             {comment.user.full_name}   {'  '}
             {localStorage.getItem('user_id') == comment.user.id ? 
