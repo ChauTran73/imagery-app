@@ -23,7 +23,7 @@ class RegistrationForm extends Component {
             password: password.value
         })
             .then(user => {
-                console.log(user)
+                // console.log(user)
                 full_name.value = ''
                 user_name.value = ''
                 email.value = ''
