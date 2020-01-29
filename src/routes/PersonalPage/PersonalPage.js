@@ -20,29 +20,24 @@ class PersonalPage extends Component {
 
     state = {
         isShowingAddImage: false,
-        isShowingMyPins: false,
+        // isShowingMyPins: false,
         loading: true,
     };
-
-    componentDidMount() {
-        
-    }
 
     handleAddImg = newImg => {
         this.context.addImage(newImg)
     }
-
 
     toggleModalAddImage = () => {
         this.setState({
             isShowingAddImage: !this.state.isShowingAddImage
         });
     }
-    toggleModalMyPins = () => {
-        this.setState({
-            isShowingMyPins: !this.state.isShowingMyPins
-        });
-    }
+    // toggleModalMyPins = () => {
+    //     this.setState({
+    //         isShowingMyPins: !this.state.isShowingMyPins
+    //     });
+    // }
 
     onAddImageSuccess = () => {
         const { location, history } = this.props
@@ -66,9 +61,9 @@ class PersonalPage extends Component {
                 <button type="button" onClick={this.toggleModalAddImage} >
                     <FontAwesomeIcon icon={faPlus} size="lg" className='blue' />
                 </button>
-                <button type="button" onClick={this.toggleModalMyPins} >
+                {/* <button type="button" onClick={this.toggleModalMyPins} >
                     My Pins
-                </button>
+                </button> */}
                 <AddImage
                     addImage={this.handleAddImg}
                     isShowing={this.state.isShowingAddImage}
@@ -77,7 +72,7 @@ class PersonalPage extends Component {
                 />
                 <MyPins
                     myPins={this.context.personalImageList}
-                    isShowing={this.state.isShowingMyPins}
+                    // isShowing={this.state.isShowingMyPins}
                     onDeleteSuccess={this.onAddImageSuccess}
                 />
 
