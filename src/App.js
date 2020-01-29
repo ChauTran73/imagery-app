@@ -26,7 +26,7 @@ class App extends Component {
       this.setState({imageList})
     }
       )
-    ImageApiService.getImagesByUser()
+    ImageApiService.getImagesByUser(localStorage.getItem('userId'))
     .then(personalImageList => {
       this.context.setPersonalImageList(personalImageList)
       this.setState({personalImageList})
