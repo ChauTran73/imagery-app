@@ -9,6 +9,7 @@ export default class ImageListPage extends Component {
   state = {
     loading: true,
     renderSaveButton: false,
+    renderDeleteButton: false
   }
 
   static contextType = ImageListContext
@@ -16,7 +17,12 @@ export default class ImageListPage extends Component {
   componentDidMount() {
     if (this.props.location.pathname == '/') {
       this.setState({
-        renderSaveButton: true
+        renderSaveButton: true,
+      })
+    }
+    if(this.props.location.pathname == '/my-wall'){
+      this.setState({
+        renderDeleteButton: true
       })
     }
   }
@@ -33,11 +39,26 @@ export default class ImageListPage extends Component {
       if (personalImageList.indexOf(result) === -1) {
         this.context.saveImage(img)
         alert('Saved Image!')
-      } 
-      else {
-        alert('Image already saved!')
       }
-    }
+        else{
+          alert('Image already saved')
+        }
+
+      }
+    //     const newFav = {
+    //       user_id: localStorage.getItem('user_id'),
+    //       image_id: img.id,
+    //     }
+    //     FavouriteService.insertFavourite(newFav)
+    //       .then(img => {
+    //         this.context.saveImage(img);
+    //       })
+    //       alert('Saved Image!')
+    //   }
+    //   else {
+    //     alert('Image already saved!')
+    //   }
+    // }
       
 
   }
@@ -50,6 +71,7 @@ export default class ImageListPage extends Component {
         image={image}
         handleSaveImage={this.handleSaveImage}
         renderSaveButton={this.state.renderSaveButton}
+        renderDeleteButton={this.state.renderDeleteButton}
       />
     )
   }
