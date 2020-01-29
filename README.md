@@ -3,7 +3,7 @@
 
 A simple social images app that users can create and log in to their account to add images, save images in their wall, see and write comments on images. 
 
-Other new features under construction such as rating images, saving images to database, searching for images, pagination, seeing anf following other users' profile, creating images and saving them to a certain topic.
+Other new features under construction such as rating images, saving images to database, searching for images, pagination, seeing and following other users' profile, creating images and saving them to a certain topic, deleting images
 
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
