@@ -43,7 +43,7 @@ export default class CommentForm extends Component {
           </Textarea>
         </div>
 
-        <div className='select'>
+        {/* <div className='select'>
           <label htmlFor='rating'>Rate this thing!</label>
           <select
             required
@@ -57,7 +57,7 @@ export default class CommentForm extends Component {
             <option value='4'>4 Stars</option>
             <option value='5'>5 Stars</option>
           </select>
-        </div>
+        </div> */}
 
         <button type='submit'>
           Post Comment
