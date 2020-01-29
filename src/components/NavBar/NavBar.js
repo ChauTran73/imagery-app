@@ -52,10 +52,10 @@ class NavBar extends Component {
                         Imagery
                     </Link>
                 </h1>
-                <div className="searchbox">
+                {/* <div className="searchbox">
                     <input type="text" name="searchBar" placeholder="Search for an image" />
                     <span className="search__icon"> <FontAwesomeIcon icon={faSearch} size='lg'/></span>
-                </div>
+                </div> */}
                 <div className='main-nav'>
 
                     <Link to="/">
