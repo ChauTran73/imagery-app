@@ -43,6 +43,11 @@ export class ImageProvider extends Component {
     this.setState({ comments })
   }
 
+  deleteComment = id => {
+    let updatedComments = this.state.comments.filter(comment => comment.id !== id)
+    this.setState({comments: [...updatedComments]})
+  }
+
   clearImage = () => {
     this.setImage(nullImage)
     this.setComments([])
@@ -55,13 +60,6 @@ export class ImageProvider extends Component {
     ])
   }
 
-//   setLikes = likes => {
-//       this.setLikes()
-//   }
-
-//   addLike = like =>{
-
-//   }
 
   render() {
     const value = {
@@ -72,10 +70,9 @@ export class ImageProvider extends Component {
       clearError: this.clearError,
       setImage: this.setImage,
       setComments: this.setComments,
+      deleteComment: this.deleteComment,
       clearImage: this.clearImage,
       addComment: this.addComment,
-    //   setLikes: this.setLikes,
-    //   addLike: this.addLike
     }
     return (
       <ImageContext.Provider value={value}>
