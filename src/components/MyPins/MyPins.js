@@ -9,7 +9,6 @@ class MyPins extends Component {
     super(props);
     this.state = {
       imageList: props.myPins,
-      renderDeleteButton: false
     }
   }
  
@@ -37,11 +36,12 @@ class MyPins extends Component {
     )
   }
   render() {
-    if (!this.props.isShowing) {
-      return null;
-    }
+    // if (!this.props.isShowing) {
+    //   return null;
+    // }
     return (
       <div className='Pins_Gallery'>
+      <h2>My Pins</h2>
         {this.props.myPins.length > 0 ? this.renderImages() : 'No pins at the moment!'}
       </div>
     );
