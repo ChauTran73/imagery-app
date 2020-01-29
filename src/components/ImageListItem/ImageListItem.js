@@ -11,8 +11,8 @@ class ImageListItem extends Component {
     render() {
         const { image } = this.props
         return (
-            <div className='image-container'>
-                <Link to={`/images/${image.id}`} className='ImageListItem'>
+            <div className='ImageListItem'>
+                <Link to={`/images/${image.id}`} >
                     <div className='ImageListItem__image' >
                         <img src={`${image.url}`} />
                        
@@ -21,18 +21,18 @@ class ImageListItem extends Component {
                                 <h2 className='ImageListItem_heading'>{image.title}</h2>
                             </div>
                         </div>
-
+                        {       
+                            this.props.renderSaveButton && localStorage.getItem('user_id')?
+                                <button className='save-icon'
+                                    onClick={() => this.props.handleSaveImage(image)}>
+                                    {/* <FontAwesomeIcon icon={faHeart} /> */} Save
+                                </button> : null
+                        }
                     </div>
                 </Link>
-                        {       
-                            this.props.renderSaveButton ?
-                                <span className='save-image'
-                                    onClick={() => this.props.handleSaveImage(image)}>
-                                    <FontAwesomeIcon icon={faHeart} size='lg'/>
-                                </span> : null
-                        }
+                      
                         {
-                            this.props.renderSaveButton && localStorage.getItem('user_id') == image.author.id ? 
+                            this.props.renderDeleteButton && localStorage.getItem('user_id') == image.author.id ? 
                             <div onClick={() => this.props.handleDeleteImage(image.id)}>
                                 <FontAwesomeIcon icon={faTrash}/> 
                             </div>: null
