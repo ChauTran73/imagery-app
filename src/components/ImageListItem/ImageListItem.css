@@ -9,6 +9,8 @@
     cursor: pointer;
 }
 
+
+
 .ImageListItem__image img{
     border-radius: 7px;
     max-width: 100%;
@@ -26,20 +28,8 @@
 .ImageListItem:hover{
       opacity: 0.8;
 }
-.pin{
-    position: relative;
-    opacity: 0;
-    transform: translate(100%,-270%);
-    color: red;
-    width: 30px;
-    
-}
-.ImageListItem:hover .pin {   
-    opacity: 1;
-}
 
-.save-image button{
-    position: absolute;
-    top: -120px;
-}
+
+
+
 
