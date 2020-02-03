@@ -25,7 +25,7 @@ class ImageListItem extends Component {
                             this.props.renderSaveButton && localStorage.getItem('user_id')?
                                 <button className='save-icon'
                                     onClick={() => this.props.handleSaveImage(image)}>
-                                    {/* <FontAwesomeIcon icon={faHeart} /> */} Save
+                                    {/* <FontAwesomeIcon icon={faHeart} /> */} Pin
                                 </button> : null
                         }
                     </div>
