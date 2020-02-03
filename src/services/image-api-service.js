@@ -16,7 +16,7 @@ const ImageApiService = {
   getImage(imageId) {
     return fetch(`${config.API_ENDPOINT}/images/${imageId}`, {
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`
+        // 'authorization': `bearer ${TokenService.getAuthToken()}`
       },
     })
       .then(res =>
