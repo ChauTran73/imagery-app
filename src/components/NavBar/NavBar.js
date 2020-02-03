@@ -24,7 +24,7 @@ class NavBar extends Component {
                     Logout
                 </Link>
                 
-                <Link to='my-wall'>
+                <Link to='/my-wall'>
                     Logged in as {UserService.getUser()}
                 </Link>
             </div>
