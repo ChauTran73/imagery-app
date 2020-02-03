@@ -54,6 +54,10 @@ Landing/Main Page:
 ## Demo:
 https://imagery-app.cmtran7393.now.sh/
 
+## Demo credentials:
+user_name: emma
+password: password
+
 
 
 
