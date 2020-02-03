@@ -40,19 +40,21 @@ export default class ImagePage extends Component {
   }
 
   renderImage() {
-     const { error, image, comments} = this.context
+     const { error, image, comments=[]} = this.context
     
     return <>
       <div className='ImagePage__image' />
       <img src= {`${image.url}`} height='450'/>
       <ImageDesc image={image} />
       <h3>Comments</h3>
-      <ImageComments comments={comments} deleteComment={this.deleteComment}/>
+      {comments.length == 0 ? <b> No comments at this moment!</b> : 
+      <ImageComments comments={comments} deleteComment={this.deleteComment}/>}
+      {localStorage.getItem('user_id') ? 
       <CommentForm 
         image={image} 
         addComment={this.context.addComment}
         setError={this.context.setError}
-      />
+      /> : null }
     </>
   }
 
@@ -91,8 +93,7 @@ function ImageDesc({ image }) {
 function ImageComments({ comments = [], deleteComment }) {
   return (
     <ul className='ImagePage__comment-list'>
-    {comments.length == 0 ? <b>No comments at this moment!</b> : 
-      comments.map(comment =>
+      {comments.map(comment =>
         <li key={comment.id} className='ImagePage__comment'>
           <p className='ImagePage__comment-text'>
             {comment.text} 
@@ -104,9 +105,8 @@ function ImageComments({ comments = [], deleteComment }) {
             {localStorage.getItem('user_id') == comment.user.id ? 
             <span onClick={() => deleteComment(comment.id)}>
               <FontAwesomeIcon icon={faTrash} style={{color: 'red'}}/>
-            </span> :  null}
+            </span> : null}
           </p>
-          
         </li>
 
       )}
