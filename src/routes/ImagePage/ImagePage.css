@@ -20,7 +20,7 @@
   
   .ImagePage__desc {
     padding: 25px 10px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
   }
   
   .ImagePage__comment {
