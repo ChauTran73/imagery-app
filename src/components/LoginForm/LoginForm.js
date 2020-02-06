@@ -72,7 +72,10 @@ class LoginForm extends Component {
                         Login
                     </button>
                 </form>
-
+            <div>
+                <h3>Demo credentials:</h3>
+                <p>User name: emma, password: password</p>
+            </div>
 
             </div>
         );
