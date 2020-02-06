@@ -65,6 +65,11 @@ div.searchbox{
     flex-direction: column;
     align-items: center;
   }
+  .navbar h1 {
+    align-self: center;
+    display: block;
+    text-align: center;
+  }
   .main-nav a{
     align-self: center;
     display: block;
